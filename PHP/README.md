@@ -147,7 +147,7 @@ If you accidentally include the same file (typically functions or classes files)
 
 The `include_once` and `require_once` statements will only include the file once even if asked to include it a second time i.e. if the specified file has already been included in a previous statement, the file is not included again.
 
-# Regular Statements 
+## Regular Statements 
 
 Some statements don't need to be prepared, such as `SELECT * and COUNT(*)` queries. 
 
@@ -208,7 +208,7 @@ $_POST["variable"];
 
 ```
 
-# isset()
+## isset()
 
 Before doing logic on a GET/POST action, it's best to wrap it in an isset statement:
 
@@ -239,6 +239,7 @@ if (isset($_GET['value1']) && !empty($_GET['value1']) and isset($_GET['value2'])
 
 ```
 
+
 ## Filter Input
 ```php
 
@@ -260,7 +261,7 @@ $name = trim($_POST['name']);
 ```
 
 
-# AJAX with PHP
+## AJAX with PHP
 
 When you want to transfer GET or POST data from HTML to PHP without a page refresh, it is necessary to use AJAX. In the example below, I submit the ID and "reason" of the item being deleted.
 
