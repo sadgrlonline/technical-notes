@@ -98,15 +98,6 @@ if (false === $stmt) {
 
 ```
 
-## Filter Input
-```php
-
-$filteredInput = filter_input(INPUT_POST, 'postValue');
-
-// escape slashes
-$filteredInput = preg_replace("#^[^:/.]*[:/]+#i", "", $url);
-
-```
 
 ## Header Redirects
 
@@ -234,14 +225,39 @@ if (isset($_GET['email']) {
 	$email = $_GET['email'];
 	echo $email;
 }
-
-
+	
+// combining statements:
+	
+if(isset($_GET['value1']) and isset($_GET['value2']) {
+	// stuff here
+}
+   
+// combining and checking if values are NOT empty
+if (isset($_GET['value1']) && !empty($_GET['value1']) and isset($_GET['value2']) && !empty($_GET['value2'])) {
+	// stuff here
+}
 
 ```
 
+## Filter Input
+```php
 
- # Notes
-- Quotation marks and apostrophes are weird in PHP. Usually when echoing stuff, you want the echo content to be wrapped in double quotes and everything inside to be wrapped in single.
+$filteredInput = filter_input(INPUT_POST, 'postValue');
+
+// escape slashes
+$filteredInput = preg_replace("#^[^:/.]*[:/]+#i", "", $url);
+
+```
+
+## Strip Input
+
+This removes whitespace from the beginning and the end of the string.
+
+```php
+
+$name = trim($_POST['name']);
+
+```
 
 
 # AJAX with PHP
@@ -321,7 +337,47 @@ if (isset($_GET['id'])) {
 }
 
 ```
-# Quick Snippets
+
+## Date and Time
+
+```php
+
+// set the timezone
+date_default_timezone_set("US/Eastern");
+
+```
+
+
+## Sessions
+
+This is the file that every page hidden behind a login screen should reference in order to tell whether a visitor is logged in.
+
+```php
+
+if(!isset($_SESSION["username"])) {
+	header("location: https://google.com");
+	exit();
+}
+
+// I don't know too much about this yet, but I've used it in the past to assign specific 'roles'. For example, I set the token when I log in to "sadness" and anyone whose token does not match, will not be able to see the page.
+
+```
+
+Then, on the pages you want users to have to be logged in to see:
+
+```
+include "auth-session.php";
+session_start();
+```
+
+The sessions will stay active, even after the user logs out. We don't want this to happen so we need to make a `logout.php` with this:
+
+```php
+
+session_start();
+session_destroy();
+header('location: index.php');
+```
 
 ## Using mail()
 
@@ -343,3 +399,6 @@ if (isset($_GET['id'])) {
 		// this executes the message send
         mail($to, $subject, $message, $headers);
 ```
+
+ # Notes
+- Quotation marks and apostrophes are weird in PHP. Usually when echoing stuff, you want the echo content to be wrapped in double quotes and everything inside to be wrapped in single.
