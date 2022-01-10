@@ -1,4 +1,5 @@
-# Ubuntu
+# Ubuntu / Linux
+
 I just committed to my first permanent Ubuntu install! This is my first time *really* hunkering down and learning how to use it, so I'm going to keep my notes here. They are not meant to be all-encompassing - they are simply to fill in the gaps for me, and hopefully others can benefit as well.
 
 I always forget the most basic commands because I don't use them frequently enough, so I wanted a place to document them.
