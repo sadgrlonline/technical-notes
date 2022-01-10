@@ -19,7 +19,12 @@ var myClasses = document.getElementsByClassName("className");
  for (var i = 0; i < myClasses.length; i++) {
  	// stuff here
  }
+
+// event listener syntax
+document.getElementById("myBtn").addEventListener("click", displayDate);
 ```
+
+
 
 ## Array Manipulation
 
