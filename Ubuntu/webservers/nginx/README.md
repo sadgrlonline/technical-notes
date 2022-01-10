@@ -1,5 +1,5 @@
 # NGINX
-
+```
 # create directory
 sudo mkdir -p /var/www/example.com/html
 
@@ -35,5 +35,4 @@ sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
 
 # restart nginx
 sudo systemctl restart nginx
-
 ```
