@@ -7,5 +7,7 @@ This is a space for me to host my coding notes. It was created to save me time f
 # [PHP / mySQLi](https://github.com/sadgrlonline/coding-notes/tree/main/PHP)
 
 # [Ubuntu](https://github.com/sadgrlonline/technical-notes/tree/main/Ubuntu)
-## [Webservers]
+## [Webservers](https://github.com/sadgrlonline/technical-notes/tree/main/Ubuntu/webservers)
+
+# [Python](https://github.com/sadgrlonline/technical-notes/tree/main/Python)
 
