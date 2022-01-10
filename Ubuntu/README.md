@@ -1,17 +1,97 @@
 # Ubuntu
+I just committed to my first permanent Ubuntu install! This is my first time *really* hunkering down and learning how to use it, so I'm going to keep my notes here. They are not meant to be all-encompassing - they are simply to fill in the gaps for me, and hopefully others can benefit as well.
 
 I always forget the most basic commands because I don't use them frequently enough, so I wanted a place to document them.
 
+## Shell Commands 
+These are commands I find myself having to look up often, so I've started writing them down!
+
+### Files & Directories
+```shell
+
+# print working directory
+pwd
+
+# change directory
+cd /home/user/Pictures
+
+# make directory
+mkdir Music
+
+# create file
+touch file.html
+
+# copy files
+cp file.jpg /home/user/Pictures
+
+# move files
+mv file.txt /home/user/Documents
+
+# find text inside of files
+grep blue notepad.txt 
+
+# find difference between two files
+diff file1.txt file2.txt
+
+# download a file from a link
+wget https://link.com/movie.avi
+
+
+
+```
+
+
+### Lock/unlock root:
+```shell
+
+#lock root
+sudo passwd -l root
+
+#unlock root
+sudo passwd root
+
+```
+
+### User management:
+
+```shell
+
+# add user
+sudo adduser username
+
+# add password
+sudo passwd username
+
+# grant sudo permissions
+usermod -aG sudo username
+
+# check sudo permissions
+sudo whoami
+
+```
+
+### Cron:
+
+```shell
+
+# list items
+crontab -l
+
+# edit cron jobs
+crontab -e
+
+```
+
 ### Checking if nginx/etherpad is running:
 
-```bash
+```shell
 sudo systemctl nginx
 sudo systemctl etherpad
 ```
 
 ### Setting up webserver ports with iptables:
 
-```bash
+```shell
     sudo iptables -I INPUT -p tcp -m tcp --dport 22 -j ACCEPT
     sudo iptables -I INPUT -p tcp -m tcp --dport 80 -j ACCEPT
     sudo iptables -I INPUT -p tcp -m tcp --dport 443 -j ACCEPT
@@ -22,7 +102,7 @@ sudo systemctl etherpad
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04
 
-```bash
+```shell
 # create directory
 sudo mkdir -p /var/www/example.com/html
 
@@ -58,4 +138,23 @@ sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
 
 # restart nginx
 sudo systemctl restart nginx
+```
+
+### File transfer & SSH
+```shell
+# open an ssh connection
+ssh user@ip
+
+
+```
+
+### System Management
+
+```shell
+# display memory usage
+free
+
+# display uptime
+uptime
+
 ```
