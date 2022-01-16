@@ -11,7 +11,6 @@ Get element by ID:
 document.getElementById(id);
 
 // get elements by className:
-
 // this returns a collection of all of the results, which you can iterate through
 var myClasses = document.getElementsByClassName("className"); 
 
@@ -64,6 +63,24 @@ if (!myArr.includes('word')) {
 };
 
 ```
+
+## String Manipulation
+
+```Javascript
+var string = "string";
+
+// identify the last character in a string
+string.charAt(str.length -1) // returns 'g'
+
+// remove the last character from a string
+string.slice(0. -1); // removes 'g'
+
+// check if another string contains the same value
+string.includes('string');
+
+
+```
+
 
 
 ## Loops and Iterators
