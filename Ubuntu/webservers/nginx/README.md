@@ -1,9 +1,11 @@
 # NGINX
-```
+
 # create directory
+```
 sudo mkdir -p /var/www/example.com/html
 
 # allow current user to edit (non-root)
+
 sudo chown -R $USER:$USER /var/www/example.com/html
 
 #set permissions
@@ -35,4 +37,28 @@ sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
 
 # restart nginx
 sudo systemctl restart nginx
+
+```
+
+# Running Certbot
+
+```
+sudo certbot --nginx
+
+```
+
+# Creating a Reverse Proxy
+
+```
+location / {
+	proxy_pass https://127.0.0.1;
+	proxy_set_header Host $host;
+}
+
+server {
+	if ($host = proxy.yesterweb.org) {
+		return 301 https://$host$request_uri;
+	}
+}
+
 ```
