@@ -1,5 +1,15 @@
 # PHP
 
+## Array Manipulation
+
+```php
+// here is a foreach loop, a good way to iterate through an array
+foreach ($arr as &$value) {
+	// stuff here
+}
+
+```
+
 ## (Prepared) Statements for Queries
 
 Prepared statements work like this:
@@ -50,8 +60,17 @@ while ($row = $result->fetch_assoc()) {
  $Title = $row["title"];
  $Entry = $row["entry"];
 	
+// protip, the stuff inside 'while' loops through the logic inside
+// for every file. sometimes you gotta access that stuff outside
+// of the loop. An easy way to do that would be to use:
+$id[] = $row['id']; // use this inside of the while loop
+	
 // any of the above variables can be echoed below to output the result
 }
+// then, after the while loop, if you use the $id variable,
+// it returns an array of all arrays that you can then iterate through
+// the best way I've found to display contents of an array is:
+$var = implode(",", $description);
  ```
  
  The `bind_params` first value is the argument, which may be one of four types:
