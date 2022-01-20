@@ -2,7 +2,7 @@
 
 ## Setting up a LAMP server:
 
-```shell
+```bash
 
 # install apache
 sudo apt install apache2
@@ -24,9 +24,4 @@ sudo apt upgrade -y
 # install php & extensions
 sudo apt install -y -q php8.1-{cli,fpm,mysql,gd,soap,mbstring,bcmath,common,xml,curl,imagick}
 
-
-
 ```
-
-Webserver rules:
-- Every site should hasve its own user and group.
