@@ -1,7 +1,10 @@
 # NGINX
 
-# create directory
-```
+# Setting up a website in NGINX
+
+These are commands, separated by line breaks, which should be run in this order to create a basic http webserver.
+
+```bash
 sudo mkdir -p /var/www/example.com/html
 
 # allow current user to edit (non-root)
@@ -40,10 +43,28 @@ sudo systemctl restart nginx
 
 ```
 
-# Running Certbot
+# The NGINX Process
+```bash
+	# check if nginx is running
+	sudo systemctl status nginx
+
+	# stop nginx
+	sudo systemctl stop nginx
+
+	# reload the nginx config without restarting the process
+	sudo systemctl reload nginx
 
 ```
+
+# Running Certbot
+
+```bash
+
+# running it live - please note too many failed attemps can get you rate limited
 sudo certbot --nginx
+
+# running it as a dry-run which is safe for testing and repeated attempts
+sudo certbot certonly --nginx --dry-run
 
 ```
 
@@ -53,12 +74,6 @@ sudo certbot --nginx
 location / {
 	proxy_pass https://127.0.0.1;
 	proxy_set_header Host $host;
-}
-
-server {
-	if ($host = proxy.yesterweb.org) {
-		return 301 https://$host$request_uri;
-	}
 }
 
 ```
