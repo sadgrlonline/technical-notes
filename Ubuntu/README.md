@@ -109,6 +109,9 @@ ssh user@ip
 # connect one time using a ssh private key
 ssh -i ~/path/to/key/key.pem user@192.128.1.1
 
+# specify port when making an ssh connection
+ssh user@ip -p 1234
+
 # download a folder remotely over ssh
 scp -r -i ~/path/to/privatekey.pem user@192.168.1.1:/home/path/to/directory ~/destination
 
@@ -124,6 +127,12 @@ kill -9 12345
 
 # view running processes (need apt-get install htop)
 htop
+
+# show size of thumbnail cache
+du -sh ~/.cache/thumbnails
+
+# clear thumbnail cache
+sudo rm -rf ~/.cache/thumbnails/*
 
 
 
@@ -213,5 +222,14 @@ Nano is one of the CLI-based text editing tools.
 ```shell
 # this outputs your top 10 most frequently used commands
 history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a; }' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10
+
+```
+
+## Troubleshooting
+
+```shell
+
+# find kernel version
+uname -r
 
 ```

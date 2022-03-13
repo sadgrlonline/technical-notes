@@ -1,6 +1,6 @@
 # Technical Notes
 
-This is a space for me to host my coding notes. It was created to save me time from Googling simple coding-related things.
+This is a space for me to host my coding notes. It was created to save me time from searching for simple coding-related things.
   
 
 **Table of contents:**

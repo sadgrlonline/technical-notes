@@ -4,29 +4,43 @@
 ## DOM Manipulation
 Note: DOM manipulation is much more easily done with jQuery.
 
-Get element by ID:
+### Selecting elements by class and ID
 
 ```Javascript
-
-document.getElementById(id);
+// get element by ID
+var button = document.getElementById('#button');
 
 // get elements by className:
 // this returns a collection of all of the results, which you can iterate through
 var myClasses = document.getElementsByClassName("className"); 
 
-// like this
- for (var i = 0; i < myClasses.length; i++) {
- 	// stuff here
- }
+// just as a sidenote, I hate iterating through classes with vanilla JS - it's so much easier for non-programmers to understand with jQuery first, tbh.
 
-// event listener syntax
-document.getElementById("myBtn").addEventListener("click", displayDate);
+```
+
+### Run after DOM is loaded
+```Javascript
+document.addEventListener("DOMContentLoaded", function() {
+	// code here
+}
+```
+
+### Event Listeners
+```Javascript
+// click listener -> run function
+item.addEventListener("click", function);
+
 ```
 
 
+## Random number
+```Javascript
+// a random number up to 9
+var random = Math.floor(Math.random() * 10);
+
+```
 
 ## Array Manipulation
-
 ```Javascript
 
 // remove last item from array
@@ -62,6 +76,24 @@ if (!myArr.includes('word')) {
 	// code here
 };
 
+// shuffle array (reorder)
+function shuffle(urlArr) {
+	let currentIndex = urlArr.length, randomIndex;
+
+	// while there are items left to shuffle...
+	while (currentIndex != 0) {
+	// pick a remaining element...
+	randomIndex = Math.floor(Math.random() * currentIndex);
+
+	// decrease
+	currentIndex--;
+
+	// swap with current element
+	[urlArr[currentIndex], urlArr[randomIndex]] = [urlArr[randomIndex], urlArr[currentIndex]];
+	}
+	return urlArr;
+}
+
 ```
 
 ## String Manipulation
@@ -81,10 +113,7 @@ string.includes('string');
 
 ```
 
-
-
 ## Loops and Iterators
-
 
 ```Javascript
 // for loop
@@ -117,12 +146,20 @@ object.item3 // returns "three"
 
 ```
 
+
+## Intervals
+
+```Javascript
+// run a function on an interval (the numbers are milliseconds)
+setInterval(function, 1000);
+
+```
+
 ## localStorage
 
 LocalStorage allows the browser to remember values from a page. The values are stored in the user's browser cache.
 
 ### Setting
-
 ```Javascript
 
 // set a single variable value in the memory
@@ -137,7 +174,6 @@ localStorage.setItem('arrName', JSON.stringify(myArr));
 ```
 
 ### Getting
-
 ```Javascript
 
 // get a single variable value from memory
@@ -162,7 +198,7 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 ```
 
 
-## Dialog
+## Confirmation Dialog
 
 To make a box appear that allows the user to confirm or deny a change:
 
@@ -171,10 +207,20 @@ confirm("Are you sure you want to make this change?")
 ```
 
 
+## AJAX Request
+Can be asynchronous (executed all at once) or synchronous (executed all at once).
+
+```Javascript
+// sending a request to a server
+xhttp.open("GET", "ajax_info.txt", true);
+xhttp.send();
+
+```
+
+
 # jQuery
 
 ## Events
-
 ```Javascript
 
 // When inside of an event, you can access the item
@@ -216,15 +262,38 @@ $('input[type=radio][name=name]').on('click', function() {
 	// code here
 });
 	
+// live search (RegExp match w/ table rows)
+$('#searchInput').on('keyup', function(e) {
+// value of text field
+var value = $(this).val();
+var patt = new RegExp(value, "i");
+	$('#table-id').find('tr').each(function() {
+	var $table = $(this);
+		if (!($table.find('td').text().search(patt) >= 0)) {
+		$table.not('th').hide();
+		}
+		if (($table.find('td').text().search(patt) >= 0)) {
+		$(this).show();
+		}
+	});
+});
+	
 	
 ```
 
 ## Loops & Iterators
-
 ```Javascript
+// loop through each element
 $('.myDiv').each(function(index, element) {
-
+	// code here
 })
+
+// loop through each 'tr' within #table
+$('#table').find('tr').each(function() {
+	// code here
+})
+
+
 ```
 
 ## Load AFTER DOM 
@@ -246,7 +315,6 @@ $(window).on("load", function() {
 ```
 
 ## Setting Input Values
-
 ```Javascript
 
 $('#inputID').val('newValue');
@@ -254,7 +322,6 @@ $('#inputID').val('newValue');
 ```
 
 ## Changing CSS
-
 ```Javascript
 
 // for one class
@@ -270,4 +337,13 @@ $('.myClass').css("")
 
 $('input').focus();
 
+```
+
+## Check if item is checked...
+```Javascript
+// for instance, to use with an on change event
+if ($(this).prop("checked") == true) {
+	// do something 
+} else {
+	// do something}
 ```

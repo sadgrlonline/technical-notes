@@ -28,11 +28,14 @@ $stmt = $con->prepare("INSERT INTO table(col1, col2) VALUES (?, ?)")
 // SELECT statement
 $stmt = $con->prepare("SELECT * FROM table WHERE id = ?");
 
+// SELECT items but display in random order on load
+ $stmt = $con->prepare("SELECT * FROM websites WHERE pending = 0 ORDER BY rand()");
+
 // UPDATE statement
 $stmt = $con->prepare("UPDATE table SET col1 = ?, col2 = ?");
 
 // DELETE statement
-$stmt = $con->prepare("DELETE FROM table WHERE id = ?");
+$stmt = $con->prepare("DELETE FROM table WHEInputRE id = ?");
 
 // the params should match the ?s in your query
 // they need to follow the SAME order as they appear in the query
@@ -48,6 +51,12 @@ $result = $stmt->get_result();
 // if you want to get a count of rows, you can do...
 $stmt->store_result();
 $match = $stmt->num_rows();
+
+// OR
+
+$sql = "SELECT COUNT(*) FROM table WHERE column2 = 0";
+$qry = mysqli_query($con, $sql);
+$totalCount = mysqli_fetch_assoc($qry)['COUNT(*)'];
 
 
 $output = "";
@@ -71,6 +80,18 @@ $id[] = $row['id']; // use this inside of the while loop
 // it returns an array of all arrays that you can then iterate through
 // the best way I've found to display contents of an array is:
 $var = implode(",", $description);
+
+// to check if your query has any matches, you can use:
+$result = $stmt->get_result();
+$stmt->store_result();
+if(mysqli_num_rows($result) < 1) {
+	// stuff here
+}
+
+// to just get the number of rows is:
+$number = mysqli_num_rows($result);
+
+
  ```
  
  The `bind_params` first value is the argument, which may be one of four types:
@@ -124,26 +145,22 @@ if (false === $stmt) {
 header('location: admin.php');
 ```
 
-## Sessions
-
+## Generate a JSON file from Data
 ```php
 
-// if a page should only be viewable to someone who is logged in, add this at the top:
-
-// if user is NOT logged in...
-// the 'uname' part above should match the variable that is on login.php
-if (!isset($_SESSION['uname'])) {
- // redirect them to another page
- header('Location: index.php');
-} else {
- // if user IS logged in, do stuff
-}
-
-
+    $rows = array();
+    $sql = ("SELECT * FROM table");
+// the below example only edits a file that already exists
+if ($result = mysqli_query($con, $sql)) {
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+    $f = fopen('../file.json', 'w'); // the w means write
+    fwrite($f, json_encode($rows));
+    }
 
 ```
-
-
 
 ## Includes & Requires
 
@@ -229,7 +246,7 @@ $_POST["variable"];
 
 ## isset()
 
-Before doing logic on a GET/POST action, it's best to wrap it in an isset statement:
+This is used to check if for a value, usually a form field value or some variable.
 
 ```php
 
@@ -258,16 +275,11 @@ if (isset($_GET['value1']) && !empty($_GET['value1']) and isset($_GET['value2'])
 
 ```
 
+For example, I can have my delete query and edit query logic on the same page, but these 'isset()' statements determine which code to run.
 
-## Filter Input
-```php
+## Input Validation
 
-$filteredInput = filter_input(INPUT_POST, 'postValue');
-
-// escape slashes
-$filteredInput = preg_replace("#^[^:/.]*[:/]+#i", "", $url);
-
-```
+## Input Sanitization
 
 ## Strip Input
 
@@ -370,30 +382,24 @@ date_default_timezone_set("US/Eastern");
 
 ## Sessions
 
-This is the file that every page hidden behind a login screen should reference in order to tell whether a visitor is logged in.
+To make a page only available to logged-in users, you must create a session and check for the session variable:
 
 ```php
-
-if(!isset($_SESSION["username"])) {
-	header("location: https://google.com");
-	exit();
-}
-
-// I don't know too much about this yet, but I've used it in the past to assign specific 'roles'. For example, I set the token when I log in to "sadness" and anyone whose token does not match, will not be able to see the page.
-
-```
-
-Then, on the pages you want users to have to be logged in to see:
-
-```
-include "auth-session.php";
+// start session
 session_start();
+// if user is not logged in
+if (!isset($_SESSION["username"])) {
+	header("Location: ../login/");
+} else {
+	// run code
+}	
 ```
 
-The sessions will stay active, even after the user logs out. We don't want this to happen so we need to make a `logout.php` with this:
+If have a public page where you want to conditionally show data depending on the session status, you'll also have to include `session_start()` at the top.
+
+Sessions typically stay active for a while. We don't want this to happen so we need to make a `logout.php` with this:
 
 ```php
-
 session_start();
 session_destroy();
 header('location: index.php');
@@ -420,5 +426,27 @@ header('location: index.php');
         mail($to, $subject, $message, $headers);
 ```
 
- # Notes
+## Passing arrays from PHP to Javascript
+```PHP
+$idarray = [];
+$urlarray = [];
+$catarray = [];
+
+while ($row = $result->fetch_assoc()) {
+
+// create arrays
+$idarray[] = $row['id'];
+$urlarray[] = $row['url'];
+$catarray[] = $row['category'];
+	
+}
+```
+
+```Javascript
+// (on same page as above...)
+var idArr = <?php echo json_encode($idarray); ?>;
+var urlArr = <?php echo json_encode($urlarray); ?>;
+var catArr = <?php echo json_encode($catarray); ?>;
+```
+# Notes
 - Quotation marks and apostrophes are weird in PHP. Usually when echoing stuff, you want the echo content to be wrapped in double quotes and everything inside to be wrapped in single.
