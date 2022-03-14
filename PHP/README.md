@@ -35,7 +35,7 @@ $stmt = $con->prepare("SELECT * FROM table WHERE id = ?");
 $stmt = $con->prepare("UPDATE table SET col1 = ?, col2 = ?");
 
 // DELETE statement
-$stmt = $con->prepare("DELETE FROM table WHEInputRE id = ?");
+$stmt = $con->prepare("DELETE FROM table WHERE id = ?");
 
 // the params should match the ?s in your query
 // they need to follow the SAME order as they appear in the query
@@ -226,11 +226,38 @@ https://sadgrl.online/index.html?var1=value1&var2=value2&var3=val3
 
 ### GET
 
-This method is restricted to 1024 characters. This method is not meant to be used to send passwords or sensitive information to the server. It also can't be used to send images or files to the server.
+This method is restricted to 1024 characters. This method is not meant to be used to send passwords or sensitive information to the server. It also can't be used to send images or files to the server. Using a GET request includes data appended to the URL.
 
 ```php
 
 $_GET["variable"];
+
+```
+
+#### Using GET to conditionally display a post on a page
+This part is a mouthful but I need to get this down somewhere so I remember it lol. So what if you have a blog app and you want to make a 'view.php' page that shows a specific blog post when a 'view post' link is clicked? 
+
+```php
+
+// the view link would look like this:
+echo '<a href="view.php?entry="' . $id . '"id="view">'
+// in regular html this would look like <a href="view.php?entry="1" id="view"> if the entry ID was 1.
+// the key here is the "entry" value, this is how we will interpret the action from the PHP side
+	
+// then, view.php would look like this:
+	
+// if the page sees the 'entry' argument
+if (isset($_GET['entry'])) {	
+	$id = $_GET['entry']; // this variable holds the id number we just passed 
+	$stmt = $con->prepare("SELECT * FROM table WHERE id = ?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+		while ($row = $result->fetch_assoc()) {
+			// code here
+		}
+	// more code can be added here
+}
 
 ```
 
@@ -376,6 +403,20 @@ if (isset($_GET['id'])) {
 
 // set the timezone
 date_default_timezone_set("US/Eastern");
+
+// get current date (formatted for SQL)
+$date = date("Y-m-d");
+
+// get current time (formatted for SQL)
+$time = date("Y-m-d H:i:s");
+
+// format date
+$formattedDate = date("l, F j Y", strtotime($date));
+// outputs Wednesday, March 9 2022
+
+// format time
+$formattedTime = date("g:iA", strtotime($time));
+// outputs 8:36PM
 
 ```
 
