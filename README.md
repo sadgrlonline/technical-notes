@@ -5,7 +5,8 @@ This is a space for me to host my coding notes. It was created to save me time f
 
 **Table of contents:**
 - [Docker](https://github.com/sadgrlonline/technical-notes/tree/main/Docker)
-- [Javascript / jQuery](https://github.com/sadgrlonline/coding-notes/tree/main/JavaScript)
+- [Javascript](https://github.com/sadgrlonline/coding-notes/tree/main/JavaScript)
+    - [jQuery](https://github.com/sadgrlonline/technical-notes/tree/main/JavaScript/jQuery)
 - [PHP](https://github.com/sadgrlonline/coding-notes/tree/main/PHP)
     - [SQL](https://github.com/sadgrlonline/technical-notes/tree/main/PHP/SQL)
 - [Ubuntu](https://github.com/sadgrlonline/technical-notes/tree/main/Ubuntu)
