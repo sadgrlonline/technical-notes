@@ -1,5 +1,5 @@
 # jQuery
-Also see [Javascript](../Javascript/)
+Also see [Javascript](https://github.com/sadgrlonline/technical-notes/tree/main/JavaScript)
 
 ## Table of Contents
 - [AJAX Request](#ajax-request)
