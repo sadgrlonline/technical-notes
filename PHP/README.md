@@ -1,5 +1,7 @@
 # PHP
 
+
+
 ## Array Manipulation
 
 ```php
@@ -10,134 +12,26 @@ foreach ($arr as &$value) {
 
 ```
 
+## Common Functions
+
+```php
+// check if a field is empty
+if (empty($a)) {
+	// do something
+}
+
+// display contents of array
+$var = implode(",", $array);
+echo $var;
+
+```
+
 ## (Prepared) Statements for Queries
 
 Prepared statements work like this:
 1. Prepare - an SQL statement template is created and sent to the database. Certain values are left unspecified, called parameters (labeled "?"); 
 2. The database parses, compiles and performs the query optimization on the SQL statement template and stores the result without executing it.
 3. Execute - at a later time, the application binds the values to the parameters and the database executes the statement. The application may execute the statement as many times as it wants with different values.
-
-**Note:** The question marks are for using prepared statements. Statements only need to be prepared if you are accepting custom inputs from your users.
-
-
-```php
-
-// INSERT statement
-$stmt = $con->prepare("INSERT INTO table(col1, col2) VALUES (?, ?)")
-
-// SELECT statement
-$stmt = $con->prepare("SELECT * FROM table WHERE id = ?");
-
-// SELECT items but display in random order on load
- $stmt = $con->prepare("SELECT * FROM websites WHERE pending = 0 ORDER BY rand()");
-
-// UPDATE statement
-$stmt = $con->prepare("UPDATE table SET col1 = ?, col2 = ?");
-
-// DELETE statement
-$stmt = $con->prepare("DELETE FROM table WHERE id = ?");
-
-// the params should match the ?s in your query
-// they need to follow the SAME order as they appear in the query
-// you can also use variables if you need to filter it first.
-$stmt->bind_param("ss", 'columnName1', 'columnName2');
-
-// then you execute
-$stmt->execute();
-
-// this gets a result set from a prepared statement
-$result = $stmt->get_result();
-
-// if you want to get a count of rows, you can do...
-$stmt->store_result();
-$match = $stmt->num_rows();
-
-// OR
-
-$sql = "SELECT COUNT(*) FROM table WHERE column2 = 0";
-$qry = mysqli_query($con, $sql);
-$totalCount = mysqli_fetch_assoc($qry)['COUNT(*)'];
-
-
-$output = "";
-
-// this loops through the array of the values
-while ($row = $result->fetch_assoc()) {
- $Id = $row['id'];
- $Date = $row["dateposted"];
- $Time = $row["timeposted"];
- $Title = $row["title"];
- $Entry = $row["entry"];
-	
-// protip, the stuff inside 'while' loops through the logic inside
-// for every file. sometimes you gotta access that stuff outside
-// of the loop. An easy way to do that would be to use:
-$id[] = $row['id']; // use this inside of the while loop
-	
-// any of the above variables can be echoed below to output the result
-}
-// then, after the while loop, if you use the $id variable,
-// it returns an array of all arrays that you can then iterate through
-// the best way I've found to display contents of an array is:
-$var = implode(",", $description);
-
-// to check if your query has any matches, you can use:
-$result = $stmt->get_result();
-$stmt->store_result();
-if(mysqli_num_rows($result) < 1) {
-	// stuff here
-}
-
-// to just get the number of rows is:
-$number = mysqli_num_rows($result);
-
-
- ```
- 
- The `bind_params` first value is the argument, which may be one of four types:
- - i - integer
- - d - double
- - s - string
- - b - BLOB
-
-## Error Output
-
-```php
-
-// to enable detailed error reporting, use the following
-$driver = new mysqli_driver();
-$driver->report_mode = MYSQLI_REPORT_ALL;
-
-// or you can use this for less strict error reporting
-$driver->report_mode = MYSQLI_REPORT_ERROR;
-
-$stmt = $con->prepare("SELECT * FROM blogs");
-
-// this checks the database connection and returns if there is an error
-if (false === $stmt) {
- die('prepare() failed:' . htmlspecialchars($stmt->error));
- exit();
-}
-
-$stmt->bind_param("s", $username);
-
-// this checks if bind_params was successful
-if (false === $stmt) {
- die('bind_params() failed:' . htmlspecialchars($stmt->error));
- exit();
-}
-
-$stmt->execute();
-
-// checks if execution was successful
-if (false === $stmt) {
- die('execute() failed:' . htmlspecialchars($stmt->error));
- exit();
-}
-
-
-```
-
 
 ## Header Redirects
 
@@ -162,7 +56,7 @@ if ($result = mysqli_query($con, $sql)) {
 
 ```
 
-## Includes & Requires
+## Include & Require
 
 The `include()` and `require()` statement allow you to include the code contained in a PHP file within another PHP file. Including a file produces the same result as copying the script from the file specified and pasted into the location where it is called.
 
@@ -182,39 +76,6 @@ The only difference is — the `include()` statement will only generate a PHP wa
 If you accidentally include the same file (typically functions or classes files) more than one time within your code using the include or require statements, it may cause conflicts. To prevent this situation, PHP provides `include_once` and `require_once statements`. These statements behave in the same way as include and require statements with one exception.
 
 The `include_once` and `require_once` statements will only include the file once even if asked to include it a second time i.e. if the specified file has already been included in a previous statement, the file is not included again.
-
-## Regular Statements 
-
-Some statements don't need to be prepared, such as `SELECT * and COUNT(*)` queries. 
-
-These can be executed like so:
-
-```php
-
-$sql = "SELECT * FROM websites";
-
-if ($result = mysqli_query($con, $sql)) {
-	// if there's more than 0 results
-	if (mysqli_num_rows($result) > 0) {
-		// this part loops
-		while ($row = mysqli_fetch_array($result)) {
-			$id = $row['id'];
-			$url = $row['url'];
-			// etc.
-		}
-	}
-}
-```
-
-```php
-
-// this selects how many records are in a specific column
-
-$sql = "SELECT COUNT(*) FROM websites WHERE category='personal'";
-$qry = mysqli_query($con, $sql);
-$personalCount = mysqli_fetch_assoc($qry)['COUNT(*)'];
-
-```
 
 ## GET and POST
 
@@ -265,6 +126,17 @@ if (isset($_GET['entry'])) {
 
 The POST method also sends encoded user information, but does so through HTTP headers. There is no size restriction and if your site is secured with SSL, it is much safer to transfer sensitive information.
 
+To POST variables from form fields:
+
+```html
+<form method="POST" action="page.php">
+	...
+</form>
+```
+
+PHP uses the **name=""** attribute of form fields to pass field data.
+
+To retrieve the variable, use this code on the "action" page listed above.: 
 ```php
 
 $_POST["variable"];
@@ -273,7 +145,7 @@ $_POST["variable"];
 
 ## isset()
 
-This is used to check if for a value, usually a form field value or some variable.
+This is used to check for a value, usually a form field value or some variable. The best way I think about this is that it's basically a **trigger** which is only pulled when the **isset()** condition is met.
 
 ```php
 
@@ -288,25 +160,10 @@ if (isset($_GET['email']) {
 	$email = $_GET['email'];
 	echo $email;
 }
-	
-// combining statements:
-	
-if(isset($_GET['value1']) and isset($_GET['value2']) {
-	// stuff here
-}
-   
-// combining and checking if values are NOT empty
-if (isset($_GET['value1']) && !empty($_GET['value1']) and isset($_GET['value2']) && !empty($_GET['value2'])) {
-	// stuff here
-}
 
 ```
 
 For example, I can have my delete query and edit query logic on the same page, but these 'isset()' statements determine which code to run.
-
-## Input Validation
-
-## Input Sanitization
 
 ## Strip Input
 
@@ -322,6 +179,8 @@ $name = trim($_POST['name']);
 ## AJAX with PHP
 
 When you want to transfer GET or POST data from HTML to PHP without a page refresh, it is necessary to use AJAX. In the example below, I submit the ID and "reason" of the item being deleted.
+
+P.S. AJAX requires jQuery :)
 
 ### POST
 
@@ -469,13 +328,14 @@ header('location: index.php');
 
 ## Passing arrays from PHP to Javascript
 ```PHP
+// define the arrays first
 $idarray = [];
 $urlarray = [];
 $catarray = [];
 
 while ($row = $result->fetch_assoc()) {
 
-// create arrays
+// the [] at the end tells it that it is an array
 $idarray[] = $row['id'];
 $urlarray[] = $row['url'];
 $catarray[] = $row['category'];
@@ -488,6 +348,54 @@ $catarray[] = $row['category'];
 var idArr = <?php echo json_encode($idarray); ?>;
 var urlArr = <?php echo json_encode($urlarray); ?>;
 var catArr = <?php echo json_encode($catarray); ?>;
+// now our database values are available in JS!
 ```
 # Notes
 - Quotation marks and apostrophes are weird in PHP. Usually when echoing stuff, you want the echo content to be wrapped in double quotes and everything inside to be wrapped in single.
+
+# Code Snippets
+For easy copy & pasting
+
+## MySQL Prepared Statements
+
+```php
+// SELECT
+	$stmt = $con->prepare("SELECT * FROM websites WHERE pending = 0 ORDER BY rand()");
+	$stmt->execute();
+    $result = $stmt->get_result();
+	while ($row = $result->fetch_assoc()) {
+		// do stuff
+	}
+	$stmt->close();
+
+// UPDATE
+ 	$stmt = $con->prepare("UPDATE websites SET title = ?, url = ?, descr = ?, category = ? WHERE id = ?");
+  	$stmt->bind_param("sssss", $title, $url, $descr, $cat, $id);
+  	$stmt->execute();
+  	$result = $stmt->get_result();
+  	$stmt->close();
+
+// CREATE
+	$stmt = $con->prepare("INSERT INTO websites(title, url, descr, category) VALUES (?,?,?,?)");
+    $stmt->bind_param("ssss", $title, $url, $descr, $cat);
+    $stmt->execute();
+    $stmt->close();
+
+// DELETE
+  $stmt = $con->prepare("DELETE FROM websites WHERE id = ?");
+  $stmt->bind_param("s", $id);
+  $stmt->execute();
+  $stmt->close();
+
+// CHECK IF QUERY HAS MATCHES
+$result = $stmt->get_result();
+$stmt->store_result();
+if(mysqli_num_rows($result) < 1) {
+	// if no matches, do this stuff
+}
+```
+```php
+// GET # OF ITEMS FROM COLUMN IN DB
+$number = mysqli_num_rows($result);
+```
+
