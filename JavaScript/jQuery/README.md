@@ -1,5 +1,5 @@
 # jQuery
-Also see [Javascript](/../Javascript/)
+Also see [Javascript](/../main/Javascript/)
 
 ## Table of Contents
 - [AJAX Request](#ajax-request)
