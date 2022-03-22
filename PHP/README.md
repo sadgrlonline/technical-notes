@@ -39,23 +39,6 @@ Prepared statements work like this:
 header('location: admin.php');
 ```
 
-## Generate a JSON file from Data
-```php
-
-    $rows = array();
-    $sql = ("SELECT * FROM table");
-// the below example only edits a file that already exists
-if ($result = mysqli_query($con, $sql)) {
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $rows[] = $row;
-        }
-    $f = fopen('../file.json', 'w'); // the w means write
-    fwrite($f, json_encode($rows));
-    }
-
-```
-
 ## Include & Require
 
 The `include()` and `require()` statement allow you to include the code contained in a PHP file within another PHP file. Including a file produces the same result as copying the script from the file specified and pasted into the location where it is called.
@@ -175,6 +158,76 @@ $name = trim($_POST['name']);
 
 ```
 
+## Date and Time
+
+```php
+
+// set the timezone
+date_default_timezone_set("US/Eastern");
+
+// get current date (formatted for SQL)
+$date = date("Y-m-d");
+
+// get current time (formatted for SQL)
+$time = date("Y-m-d H:i:s");
+
+// format date
+$formattedDate = date("l, F j Y", strtotime($date));
+// outputs Wednesday, March 9 2022
+
+// format time
+$formattedTime = date("g:iA", strtotime($time));
+// outputs 8:36PM
+
+```
+
+
+## Sessions
+
+To make a page only available to logged-in users, you must create a session and check for the session variable:
+
+```php
+// start session
+session_start();
+// if user is not logged in
+if (!isset($_SESSION["username"])) {
+	header("Location: ../login/");
+} else {
+	// run code
+}	
+```
+
+If have a public page where you want to conditionally show data depending on the session status, you'll also have to include `session_start()` at the top.
+
+Sessions typically stay active for a while. We don't want this to happen so we need to make a `logout.php` with this:
+
+```php
+session_start();
+session_destroy();
+header('location: index.php');
+```
+
+## Using mail()
+
+```php
+	
+        $email = "sadgrl.online@gmail.com"; // specify address
+        $to = $email; // send email to our user
+        $subject = 'New Yesterweb Ring Application'; // subject
+        $message = '
+
+        Someone has recently submitted an application to join the webring. To view pending applications, click <a href="https://miau.sadgrl.online/yesterweb-ring/milkaroni/dashboard/approve/">here</a>.
+        
+        ';
+
+        $headers = 'From:noreply@sadgrl.leprd.space' . "\r\n"; // this sets the email header's 'from' address
+        $headers .= 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+		// this executes the message send
+        mail($to, $subject, $message, $headers);
+```
+
 
 ## AJAX with PHP
 
@@ -256,75 +309,6 @@ if (isset($_GET['id'])) {
 
 ```
 
-## Date and Time
-
-```php
-
-// set the timezone
-date_default_timezone_set("US/Eastern");
-
-// get current date (formatted for SQL)
-$date = date("Y-m-d");
-
-// get current time (formatted for SQL)
-$time = date("Y-m-d H:i:s");
-
-// format date
-$formattedDate = date("l, F j Y", strtotime($date));
-// outputs Wednesday, March 9 2022
-
-// format time
-$formattedTime = date("g:iA", strtotime($time));
-// outputs 8:36PM
-
-```
-
-
-## Sessions
-
-To make a page only available to logged-in users, you must create a session and check for the session variable:
-
-```php
-// start session
-session_start();
-// if user is not logged in
-if (!isset($_SESSION["username"])) {
-	header("Location: ../login/");
-} else {
-	// run code
-}	
-```
-
-If have a public page where you want to conditionally show data depending on the session status, you'll also have to include `session_start()` at the top.
-
-Sessions typically stay active for a while. We don't want this to happen so we need to make a `logout.php` with this:
-
-```php
-session_start();
-session_destroy();
-header('location: index.php');
-```
-
-## Using mail()
-
-```php
-	
-        $email = "sadgrl.online@gmail.com"; // specify address
-        $to = $email; // send email to our user
-        $subject = 'New Yesterweb Ring Application'; // subject
-        $message = '
-
-        Someone has recently submitted an application to join the webring. To view pending applications, click <a href="https://miau.sadgrl.online/yesterweb-ring/milkaroni/dashboard/approve/">here</a>.
-        
-        ';
-
-        $headers = 'From:noreply@sadgrl.leprd.space' . "\r\n"; // this sets the email header's 'from' address
-        $headers .= 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-		// this executes the message send
-        mail($to, $subject, $message, $headers);
-```
 
 ## Passing arrays from PHP to Javascript
 ```PHP
@@ -350,6 +334,24 @@ var urlArr = <?php echo json_encode($urlarray); ?>;
 var catArr = <?php echo json_encode($catarray); ?>;
 // now our database values are available in JS!
 ```
+
+## Generate a JSON file from Data
+```php
+
+    $rows = array();
+    $sql = ("SELECT * FROM table");
+// the below example only edits a file that already exists
+if ($result = mysqli_query($con, $sql)) {
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+    $f = fopen('../file.json', 'w'); // the w means write
+    fwrite($f, json_encode($rows));
+    }
+
+```
+
 # Notes
 - Quotation marks and apostrophes are weird in PHP. Usually when echoing stuff, you want the echo content to be wrapped in double quotes and everything inside to be wrapped in single.
 
@@ -382,20 +384,20 @@ For easy copy & pasting
     $stmt->close();
 
 // DELETE
-  $stmt = $con->prepare("DELETE FROM websites WHERE id = ?");
-  $stmt->bind_param("s", $id);
-  $stmt->execute();
-  $stmt->close();
+	$stmt = $con->prepare("DELETE FROM websites WHERE id = ?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$stmt->close();
 
 // CHECK IF QUERY HAS MATCHES
-$result = $stmt->get_result();
-$stmt->store_result();
-if(mysqli_num_rows($result) < 1) {
-	// if no matches, do this stuff
-}
+	$result = $stmt->get_result();
+	$stmt->store_result();
+	if(mysqli_num_rows($result) < 1) {
+		// if no matches, do this stuff
+	}
 ```
 ```php
 // GET # OF ITEMS FROM COLUMN IN DB
-$number = mysqli_num_rows($result);
+	$number = mysqli_num_rows($result);
 ```
 
