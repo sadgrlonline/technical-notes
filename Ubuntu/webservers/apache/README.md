@@ -1,5 +1,22 @@
 # Apache
 
+## Password Protecting a Directory
+
+### .htaccess
+
+```
+AuthName "Dialog prompt"
+AuthType Basic
+AuthUserFile .htpasswd
+Require valid-user
+```
+
+### .htpasswd
+
+Make sure to encrypt your password!
+
+```admin:supersecretpassword```
+
 ## Setting up a LAMP server:
 
 ```bash
