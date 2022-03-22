@@ -1,5 +1,7 @@
 # PHP
 
+## Table of Contents
+- [Array Manipulation](#array-manipulation)
 
 
 ## Array Manipulation
