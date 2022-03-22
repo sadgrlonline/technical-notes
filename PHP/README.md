@@ -2,6 +2,20 @@
 
 ## Table of Contents
 - [Array Manipulation](#array-manipulation)
+- [Common Functions](#common-functions)
+- [Header Redirects](#header-redirects)
+- [Include & Require](#include--require)
+- [GET and POST](#get-and-post)
+- [isset()](#isset)
+- [Strip Input](#strip-input)
+- [Date & Time](#date-and-time)
+- [Sessions](#sessions)
+- [mail()](#using-mail)
+- [AJAX with PHP](#ajax-with-php)
+- [Passing arrays from PHP to JS](#passing-arrays-from-php-to-javascript)
+- [Code Snippets](#code-snippets)
+
+
 
 
 ## Array Manipulation
@@ -27,13 +41,6 @@ $var = implode(",", $array);
 echo $var;
 
 ```
-
-## (Prepared) Statements for Queries
-
-Prepared statements work like this:
-1. Prepare - an SQL statement template is created and sent to the database. Certain values are left unspecified, called parameters (labeled "?"); 
-2. The database parses, compiles and performs the query optimization on the SQL statement template and stores the result without executing it.
-3. Execute - at a later time, the application binds the values to the parameters and the database executes the statement. The application may execute the statement as many times as it wants with different values.
 
 ## Header Redirects
 
