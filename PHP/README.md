@@ -7,10 +7,12 @@
 - [Include & Require](#include--require)
 - [GET and POST](#get-and-post)
 - [isset()](#isset)
+- [Honeypot Field](#honeypot-field)
 - [Strip Input](#strip-input)
 - [Date & Time](#date-and-time)
 - [Sessions](#sessions)
 - [mail()](#using-mail)
+- [Uploading Files](#uploading-files)
 - [AJAX with PHP](#ajax-with-php)
 - [Passing arrays from PHP to JS](#passing-arrays-from-php-to-javascript)
 - [Code Snippets](#code-snippets)
@@ -157,6 +159,26 @@ if (isset($_GET['email']) {
 
 For example, I can have my delete query and edit query logic on the same page, but these 'isset()' statements determine which code to run.
 
+## Honeypot Field
+
+Some bots crawl public webpages and submit spam entries to any form they find. We can prevent this with a honeypot field. This is a hidden input field you put into the HTML of your form, and then handle the submission in your PHP.
+
+```php
+
+// here is the HTML (should be part of the form)
+<input type="hidden" name="honeypot">
+
+// then in your PHP logic
+$honeypot = $_POST['honeypot'];
+  $honeypot = $_POST['honeypot'];
+  if(!empty($honeypot)){
+    return;
+  }else{
+	  // run the rest of the form logic here!
+  }
+```
+
+
 ## Strip Input
 
 This removes whitespace from the beginning and the end of the string.
@@ -237,6 +259,51 @@ header('location: index.php');
         mail($to, $subject, $message, $headers);
 ```
 
+## Uploading Files
+
+```php
+// this is a reusable function I made for easily uploading files and saving them to a directory on your webserver
+// it takes three arguments:
+// $file = $_FILES['filename'] <-- this should match the name of the upload form
+// $name = "file" <-- this is the name we save the file as
+// $suffix = "-diagram." <-- this gets appended to the end of the name, not necessary but useful
+    function uploadFile($file, $name, $suffix) {
+        $name = $name;
+        $suffix = $suffix;
+        $file = $file;
+        $fileTmpPath = $file['tmp_name'];
+        $fileName = $file['name'];
+        $fileSize = $file['uploadedFile']['size'];
+        $fileType = $file['uploadedFile']['type'];
+        $fileNameCmps = explode(".", $fileName);
+        $fileExtension = strtolower(end($fileNameCmps));
+        
+        $newFileName = $name . $suffix . $fileExtension;
+
+		// specify which file extensions you're allowing users to upload
+        $allowedfileExtensions = array('pdf', 'jpg');
+            if (in_array($fileExtension, $allowedfileExtensions)) {
+				
+				// if you're not sure of the file path, you can echo getcwd() to get the directory you're working in.
+                $uploadFileDir = '/home/username/public_html/project/uploads/';
+				
+                $dest_path = $uploadFileDir . $newFileName;
+                 
+                if(move_uploaded_file($fileTmpPath, $dest_path))
+                {
+                  $message ='File is successfully uploaded.';
+                  echo $message;
+                    
+                }
+                    else{
+                      $message = 'There was some error moving the file to upload directory. Please make sure the upload directory is writable by web server.';
+                      echo $message;
+                }
+                
+            }
+        }
+
+```
 
 ## AJAX with PHP
 
