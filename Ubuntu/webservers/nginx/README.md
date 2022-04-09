@@ -18,6 +18,8 @@ This is for configuring those files in `/sites-enabled/`
 
 ## Base Config
 
+I always have the least amount of problems when I configure a new domain like this, and then run certbot to get it secured, before adding anything extra.
+
 ```
 server {
         listen 80;
@@ -38,7 +40,7 @@ server {
 ## Creating a Reverse Proxy
 ```
 location / {
-	proxy_pass https://127.0.0.1;
+	proxy_pass https://127.0.0.1:5500;
 	proxy_set_header Host $host;
 }
 
