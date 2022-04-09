@@ -1,10 +1,29 @@
 # SQL
 
-## Database Keys
+## Table of Contents
 
-**Foreign key:** A column or group of columns that provides a link between data in two tables.
+- [General Knowledge](#general-knowledge)
+  - [Relationships](#relationships)
+    - [One-to-one](#one-to-one-relationships)
+    - [One-to-many](#one-to-many-relationships)
+    - [Many-to-many](#many-to-many-relationships)
+  - [Queries](#queries)
+  - [Creating a User](#creating-a-user-command-line)
+  
 
-## Many-to-many relationships
+## General Knowledge
+
+### Relationships
+
+#### One-to-one relationships
+
+A one-to-one relationship refers to the relationship between two tables where there is a record in one table that is associated with exactly one record in another table. An example of this would be where one table's ID column is referenced in another table. This is known as "primary key as foreign key". 
+
+You can either use the same primary key in both tables, or add a new column to one of the tables and make it a foreign key.
+
+#### One-to-many relationships
+
+#### Many-to-many relationships
 You have to use a third table to represent the relationship, so you have the following three tables:
 
 ```sql 
@@ -26,7 +45,7 @@ Website can have more than one category.
 Category can have more than one website.
 ```
 
-### Queries
+## Queries
 
 ```sql
 
@@ -42,20 +61,17 @@ SELECT websites.id, websites.url, websites.description, websites.pending, catego
 
 ```
 
-### Foreign Keys
-
-The `FOREIGN KEY` restraint is used to prevent actions that would destroy links between tables. A `FOREIGN KEY` refers to the `PRIMARY KEY` of another table.
-
-
-### Troubleshooting
-
-#### Foreign Key Error Messages
-
+## Creating a user (command line)
 ```sql
+/* open MariaDB */
+mysql -u root -p /* this will prompt for root password & open command line */
 
-> Cannot add or update a child row: a foreign key constraint fails.
-/* This error occurs because you're trying to update a table that doesn't have a valid value for the selected foreign key.
+/* in the command line now */
+SHOW DATABASES; /* shows all databases */
 
+/* create user */
+CREATE USER 'username'@localhost IDENTIFIED BY 'password1';
 
-
+/* grant permissions */
+GRANT ALL PRIVILEGES ON *.* TO 'username'@localhost;
 ```
