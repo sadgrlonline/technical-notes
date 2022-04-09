@@ -6,6 +6,7 @@
   - [Reverse Proxy](#reverse-proxy)
   - [Routing to Page](#routing-a-directory-to-a-specific-file)
   - [PHP Configuration](#php-configuration)
+  - [Ports and SSL](#hosting-an-ssl-site-on-a-port-other-than-443)
 - [NGINX Process](#nginx-process)
 - [Certbot](#certbot)
 - [Permissions](#permissions)
@@ -62,6 +63,37 @@ location ~ /.php$ {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include /etc/nginx/fastcgi_params;
 }
+```
+
+## Hosting an SSL site on a port other than 443
+
+Once a site is secured, I can then route it to a different port if I already have something else listening.
+
+```bash
+# the first server block listens via 443 to make the handshake
+server {
+        listen 443 ssl;
+        ssl_certificate /etc/...
+        ssl_certificate_key /etc/...
+        include ...
+        ssl_dhparam ...
+
+        return 301 $scheme://server.sadgrl.online:9443$request_uri;
+}
+
+# then the second server block assigns it to an alternate port
+server {
+        listen 9443 ssl;
+        ssl_certificate ...
+        ssl_certificate_key ...
+        add_header Strict-Transport-Security "max-age=315360000; include SubDomains";
+        root /var/www/domain.com
+        index index.html;
+
+        # then you can add a location block with more information
+}
+
+
 ```
 
 # NGINX Process
