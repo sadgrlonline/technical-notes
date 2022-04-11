@@ -10,6 +10,7 @@ Also see [Javascript](https://github.com/sadgrlonline/technical-notes/tree/main/
 - [Changing CSS](#changing-css)
 - [Changing Focus](#changing-focus)
 - [Check if item is checked](#check-if-item-is-checked)
+- [Snippets](#snippets)
 
 ## AJAX Request
 Can be asynchronous (executed all at once) or synchronous (executed all at once).
