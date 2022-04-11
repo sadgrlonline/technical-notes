@@ -154,3 +154,33 @@ if ($(this).prop("checked") == true) {
 } else {
 	// do something}
 ```
+## Snippets
+
+```JS
+// I finally figured out how to nicely and easily repopulate an 'edit view' with JS, from a php database (at least in a table form).
+        $('.editBtn').on("click", function() {
+            // grab the ID of the row being edited
+            var id = $(this).parent('td').parent('tr').attr('id');
+            
+            // grab the length of how many columns (in this case 6)
+            //$(this).parent('td').parent('tr').children().length;
+            
+            // this nicely grabs the existing text inside the cells
+            // so we wanna hold onto this and add it to an array
+            var dataArr = [];
+            $($(this).parent('td').parent('tr').children()).each(function() {
+               //console.log($(this).text().trim());
+               dataArr.push($(this).text().trim());
+            });
+            
+            // then we loop through again
+            i = 0; // using this to keep track
+            $($(this).parent('td').parent('tr').children()).each(function() {
+               //console.log($(this).text().trim());
+               
+               $(this).html('<input type="text" value=' + dataArr[i] + '>');
+               i++;
+               //dataArr.push($(this).text().trim());
+            });
+        });
+```
