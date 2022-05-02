@@ -57,7 +57,7 @@ location / {
 ## PHP Configuration
 ```bash
 # this allows us to execute PHP code in our PHP files
-location ~ /.php$ {
+location ~ \.php$ {
         fastcgi_pass unix:/run/php/php7.4-fpm.sock; # this path is specific to your PHP version
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -127,6 +127,9 @@ sudo certbot certonly --nginx -d domain.com --dry-run
 ```bash
 # assigning permissions to the webserver (nginx)
 sudo chown -R www-data:www-data /var/www/domain.com
+
+# assigning permissions to the user
+sudo chown -R user:user /var/www/domain.com
 ```
 
 # Fresh Server Setup
@@ -174,3 +177,6 @@ sudo systemctl restart nginx
 sudo systemctl reload nginx
 
 ```
+
+# Notes
+- When SFTPing into the webserver, the client will only allow you to upload/modify things when the directory is owned by the SFTP user.
