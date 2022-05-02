@@ -8,6 +8,7 @@ Also see [jQuery](jQuery)
 - [Array Manipulation](#array-manipulation)
 - [String Manipulation](#string-manipulation)
 - [Loops and Iterators](#loops-and-iterators)
+- [Prevent Form Spam](#prevent-form-spam)
 - [Objects](#objects)
 - [Intervals](#intervals)
 - [localStorage](#localstorage)
@@ -137,6 +138,26 @@ for (var i = 0; i < items.length; i++) {
  item.forEach((arrItem, indx) => {
 	// stuff here
  });
+```
+
+### Prevent Form Spam
+
+```Javascript
+var botField = document.getElementById('botField');
+var submitBtn = document.getElementById('submit_btn');
+
+// the submit button starts out disabled
+submitBtn.disabled = true;
+
+botField.addEventListener("keyup", checkIfBot);
+
+
+function checkIfBot() {
+  var value = botField.value;
+  if (value == "website") {
+   submitBtn.disabled = false;
+}
+}
 
 ```
 
