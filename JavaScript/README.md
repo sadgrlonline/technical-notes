@@ -111,7 +111,7 @@ function shuffle(urlArr) {
 // check for duplicate
 
 // array to check against
-var sitesArr = <?php echo json_encode($websites); ?>;
+var sitesArr = arrayToCheck;
 // input to verify
 var urlInput = document.getElementById('urlInput');
 // our dupe note in the form
