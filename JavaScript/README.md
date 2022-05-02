@@ -108,6 +108,38 @@ function shuffle(urlArr) {
 	return urlArr;
 }
 
+// check for duplicate
+
+// array to check against
+var sitesArr = <?php echo json_encode($websites); ?>;
+// input to verify
+var urlInput = document.getElementById('urlInput');
+// our dupe note in the form
+var dupe = document.getElementById('dupe');
+
+// makes our function run when the input field is modified
+urlInput.addEventListener("change", checkIfDupe);
+
+
+function checkIfDupe() {
+        var value = urlInput.value;
+	// urlInput is the field we're checking against the array
+
+        // check if array includes a value
+    if (sitesArr.includes(value) {
+    // this makes our error message display
+        dupe.style.display = "block";
+        dupe.style.color = "red";
+        dupe.style.fontWeight = "bold";
+        submitBtn.disabled = true;
+    } else {
+    // this reenables the submit button if it's not a duplicate
+        console.log('no dupe');
+        dupe.style.display = "none";
+        submitBtn.disabled = false;
+    }
+}
+
 ```
 
 ## String Manipulation
