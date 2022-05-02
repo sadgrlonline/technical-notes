@@ -10,4 +10,13 @@ WINEPREFIX=~/prefix wine file.exe
 
 # run msi file
 WINEPREFIX=~/prefix wine msiexec /i file.msi 
+
+# debug file
+WINEPREFIX=~/prefix winedbg file.exe
+
+# install winetricks dependency
+WINEPREFIX=~/prefix winetricks dependencyName
+
+# update winetricks
+sudo winetricks --self-update
 ```
