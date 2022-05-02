@@ -26,3 +26,26 @@ sudo netstat -tulpn
 ```bash
 systemd-resolve --flush-caches
 ```
+## Configure server with an external mailserver
+
+```bash 
+# for this I found a tool called ssmtp, and it allows you to send PHP mail() with an external SMTP server.
+sudo apt-get install ssmtp
+# then you have to swap to temporary root
+sudo -i
+cd /etc/ssmtp
+sudo nano ssmtp.conf
+
+# now you edit the config
+root=email@server.com
+mailhub=mail.server.com:465
+AuthUser=email@server.com
+AuthPass=password
+UseTLS=Yes
+FromLineOverride=Yes
+
+# can send a test from temp root cmd line
+echo -e 'Subject: test' | sendmail -v testaccount@email.com
+# this should give an output - if it hangs or outputs nothing, it's not working
+```
+
