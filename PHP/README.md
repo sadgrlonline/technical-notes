@@ -155,6 +155,11 @@ if (isset($_GET['email']) {
 	echo $email;
 }
 
+// you can also check if a field is empty at the same time:
+if (isset($_GET['email']) AND !empty($_GET['email'])) {
+   // code here
+}
+
 ```
 
 For example, I can have my delete query and edit query logic on the same page, but these 'isset()' statements determine which code to run.
