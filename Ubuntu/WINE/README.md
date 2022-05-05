@@ -14,9 +14,14 @@ WINEPREFIX=~/prefix wine msiexec /i file.msi
 # debug file
 WINEPREFIX=~/prefix winedbg file.exe
 
+# check running wine processes
+pgrep wineserver
+
 # install winetricks dependency
 WINEPREFIX=~/prefix winetricks dependencyName
 
 # update winetricks
 sudo winetricks --self-update
+
+
 ```
