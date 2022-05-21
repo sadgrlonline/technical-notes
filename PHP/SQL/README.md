@@ -87,4 +87,7 @@ sudo ./mysql_upgrade -u root -p
 /* delete a database giving you trouble */
 cd /opt/lampp/var/mysql
 rm -rf database
+
+/* back up a single database */
+mysqldump -u root -p databaseName > databaseName.sql
 ```
