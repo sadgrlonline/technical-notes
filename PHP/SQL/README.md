@@ -75,3 +75,16 @@ CREATE USER 'username'@localhost IDENTIFIED BY 'password1';
 /* grant permissions */
 GRANT ALL PRIVILEGES ON *.* TO 'username'@localhost;
 ```
+
+## Accessing SQL via command line (MariaDB & Xampp)
+```
+sudo /opt/lampp/bin/mysql -u root -p
+
+/* if it asks you to upgrade */
+cd /opt/lampp/bin
+sudo ./mysql_upgrade -u root -p
+
+/* delete a database giving you trouble */
+cd /opt/lampp/var/mysql
+rm -rf database
+```
