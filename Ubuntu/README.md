@@ -217,6 +217,12 @@ Nano is one of the CLI-based text editing tools.
 
 ```
 
+## Harddrive
+```shell
+# display all hard disks names, sizes, and location
+dh -T
+```
+
 
 ## Cool Scripts
 ```shell
