@@ -9,6 +9,7 @@
 - [Modules](#modules)
     - [Beautiful Soup & Requests](#beautiful-soup--requests)
 	- [Pandas](#pandas)
+	- [PyMySQL](#pymysql)
 
 
 ## Install
