@@ -36,6 +36,12 @@ print("hello!")
 # remove whitespace in string
 text.strip()
 
+# creating function
+def my_function():
+	# logic here
+
+# calling function
+my_function()
 
 # if statement
 if 5 > 3:
@@ -72,6 +78,9 @@ while page != 20:
 ## Date and time
 
 ```python
+# import datetime
+from datetime import datetime
+
 # get current datetime
 now = datetime.now()
 print(now.strftime("%d/%m/%Y %H:%M:%S"))
@@ -109,8 +118,32 @@ site = BeautifulSoup(link.content, "html-parser")
 # for exporting cleanly to excel
 # pip install pandas
 
-# this exports to XLSX
+# import pandas
+import pandas as pd
+
+# export to XLSX
 df = pd.DataFrame(data).T
 df.columns = ["Column 1, Column 2, Column 3"]
 df.to_excel(excel_writer = "myfile.xlsx")
+```
+
+### PyMySQL
+```python
+# for connecting to a database
+# pip install pymysql
+
+# import pymysql
+import pymysql
+
+# establish db connection
+connection = pymysql.connect(host="localhost", user="root", passwd="", database="jobs")
+cursor = connection.cursor()
+
+# submit to database
+insert = "INSERT INTO table(col1, col2, col3, col4) values(%s, %s, %s, %s);"
+cursor.execute(insert, (col1, col2, col3, col4))
+
+# commit & close connection
+connection.commit()
+connection.close()
 ```
