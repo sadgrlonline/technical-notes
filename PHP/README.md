@@ -42,6 +42,9 @@ if (empty($a)) {
 $var = implode(",", $array);
 echo $var;
 
+// replace special characters in string
+$string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+
 ```
 
 ## Header Redirects
