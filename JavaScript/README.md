@@ -5,8 +5,8 @@ Also see [jQuery](jQuery)
 ## Table of Contents
 - [Selecting and iterating elements](#selecting-and-iterating-elements)
 - [DOM manipulation](#dom-manipulation)
-- [Random Number](#random-number)
-- [Array Manipulation](#array-manipulation)
+- [Random number](#random-number)
+- [Array manipulation](#array-manipulation)
 - [String Manipulation](#string-manipulation)
 - [Loops and Iterators](#loops-and-iterators)
 - [Prevent Form Spam](#prevent-form-spam)
@@ -32,7 +32,7 @@ var items = document.querySelectorAll(".item");
 
 // to iterate:
 items.forEach((item) => {
-	console.log(item);
+   console.log(item);
 })
 
 // METHOD 2: (getElementsbyClassName)
@@ -42,11 +42,11 @@ var items = document.getElementsByClassName("item");
 
 // to iterate:
 for (var i = 0; i < items.length; i++) {
-	console.log(item[i]); // each item
+   console.log(item[i]); // each item
 }
 // OR
 Array.from(items).forEach((item) => {
-	console.log(item); // each item
+   console.log(item); // each item
 })
 ```
 ## DOM manipulation
@@ -77,7 +77,7 @@ div.prepend(el) // attaches before the selected element
 ### Run after DOM is loaded
 ```Javascript
 document.addEventListener("DOMContentLoaded", function() {
-	// code here
+   // code here
 }
 ```
 
@@ -99,17 +99,17 @@ button.addEventListener("click", myFunction);
 // you can access certain information about the event
 // by passing an argument
 function myFunction(e) {
-  console.log("test!");
-  console.log(e); // outputs: [object MouseEvent] (but watch this:)
-  console.log(e.target); // outputs: <button id="button">Click me</button>
-  console.log(e.target.getAttribute("id")); // outputs: "button"
-  console.log(e.target.innerText); // outputs: "Click me"
+   console.log("test!");
+   console.log(e); // outputs: [object MouseEvent] (but watch this:)
+   console.log(e.target); // outputs: <button id="button">Click me</button>
+   console.log(e.target.getAttribute("id")); // outputs: "button"
+   console.log(e.target.innerText); // outputs: "Click me"
 }
 
 // METHOD 2:
 
 button.addEventListener("click", function(e) {
-  // all of the above logic regarding "e" applies here
+   // all of the above logic regarding "e" applies here
 })
 ```
 
@@ -137,7 +137,7 @@ var random = Math.floor(Math.random() * 10);
 
 ```
 
-## Array Manipulation
+## Array manipulation
 ```Javascript
 
 // remove last item from array
@@ -152,9 +152,9 @@ array.join('-'); // can use a separator in an argument to add one between each i
 
 // map two arrays into a key/value pair - arr1 is the key and arr2 is the value
 arr2.map(function(obj, index) {
-	var myobj = {};
-	myobj[arr1[index]] = obj;
-	return myobj;
+   var myobj = {};
+   myobj[arr1[index]] = obj;
+   return myobj;
  });
 
 // combine two or more arrays into a single array
@@ -165,62 +165,27 @@ var myAlphabetizedArray = myArr.sort();
 
 // check if array includes a value
 if (myArr.includes('word')) {
-	// code here
+   // code here
 };
 
 // check if array does not include a value
 if (!myArr.includes('word')) {
-	// code here
+   // code here
 };
 
 // shuffle array (reorder)
 function shuffle(urlArr) {
-	let currentIndex = urlArr.length, randomIndex;
-
-	// while there are items left to shuffle...
-	while (currentIndex != 0) {
-	// pick a remaining element...
-	randomIndex = Math.floor(Math.random() * currentIndex);
-
-	// decrease
-	currentIndex--;
-
-	// swap with current element
-	[urlArr[currentIndex], urlArr[randomIndex]] = [urlArr[randomIndex], urlArr[currentIndex]];
-	}
-	return urlArr;
-}
-
-// check for duplicate
-
-// array to check against
-var sitesArr = arrayToCheck;
-// input to verify
-var urlInput = document.getElementById('urlInput');
-// our dupe note in the form
-var dupe = document.getElementById('dupe');
-
-// makes our function run when the input field is modified
-urlInput.addEventListener("change", checkIfDupe);
-
-
-function checkIfDupe() {
-        var value = urlInput.value;
-	// urlInput is the field we're checking against the array
-
-        // check if array includes a value
-    if (sitesArr.includes(value) {
-    // this makes our error message display
-        dupe.style.display = "block";
-        dupe.style.color = "red";
-        dupe.style.fontWeight = "bold";
-        submitBtn.disabled = true;
-    } else {
-    // this reenables the submit button if it's not a duplicate
-        console.log('no dupe');
-        dupe.style.display = "none";
-        submitBtn.disabled = false;
-    }
+   let currentIndex = urlArr.length, randomIndex;
+   // while there are items left to shuffle...
+   while (currentIndex != 0) {
+   // pick a remaining element...
+   randomIndex = Math.floor(Math.random() * currentIndex);
+   // decrease
+   currentIndex--;
+   // swap with current element
+   [urlArr[currentIndex], urlArr[randomIndex]] = [urlArr[randomIndex], urlArr[currentIndex]];
+   }
+   return urlArr;
 }
 
 ```
@@ -247,11 +212,11 @@ string.includes('string');
 ```Javascript
 // for loop
 for (var i = 0; i < items.length; i++) {
- 	// stuff here
+    // stuff here
  }
 // forEach iterator
  item.forEach((arrItem, indx) => {
-	// stuff here
+   // stuff here
  });
 ```
 
