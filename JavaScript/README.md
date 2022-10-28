@@ -94,7 +94,18 @@ button.addEventListener("click", function(e) {
 
 #### Types of event listeners
 ```Javascript
-item.addEventListener("click", function); // triggers when element is clicked
+// triggered when element is clicked
+element.addEventListener("click", myEvent);
+
+// triggered when user hovers cursor over item
+element.addEventListener("mouseover", myEvent);
+
+// triggered when item is :focused (useful for input fields)
+input.addEventListener("focus", myEvent);
+
+// triggered each time a keystroke is pressed while focused on this element
+input.addEventListener("keypress", myEvent); 
+(e.keyCode will give you the code of the key entered. 13 = the enter key.)
 ```
 
 
