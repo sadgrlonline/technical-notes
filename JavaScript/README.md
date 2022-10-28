@@ -16,6 +16,7 @@ Also see [jQuery](jQuery)
 - [Checking if Mobile Device](#checking-if-viewed-on-mobile-device)
 - [Confirmation Dialog](#confirmation-dialog)
 - [URL search params](#url-search-params)
+- [Media manipulation](#media-manipulation)
 
 ## Selecting and iterating elements
 
@@ -362,4 +363,11 @@ var name = urlParams.get("name");
 if (name) {
    // logic here
 }
+```
+
+## Media manipulation
+
+```Javascript
+// play audio
+new Audio('https://site.com/file.mp3').play();
 ```
