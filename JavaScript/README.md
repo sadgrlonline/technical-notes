@@ -4,7 +4,7 @@ Also see [jQuery](jQuery)
 
 ## Table of Contents
 - [Selecting and iterating elements](#selecting-and-iterating-elements)
-- [DOM loading](#dom-loading)
+- [DOM manipulation](#dom-manipulation)
 - [Random Number](#random-number)
 - [Array Manipulation](#array-manipulation)
 - [String Manipulation](#string-manipulation)
@@ -26,8 +26,8 @@ var button = document.getElementById('#button');
 
 // get elements by class:
 
-METHOD 1: (querySelectorAll)
-(can also be used for element tags)
+// METHOD 1: (querySelectorAll)
+// (can also be used for element tags)
 
 var items = document.querySelectorAll(".item");
 // selects all .item / class="item" elements
@@ -37,7 +37,7 @@ items.forEach((item) => {
 	console.log(item);
 })
 
-METHOD 2: (getElementsbyClassName)
+// METHOD 2: (getElementsbyClassName)
 
 var items = document.getElementsByClassName("item");
 // selects all .item / class="item" elements
@@ -51,7 +51,7 @@ Array.from(items).forEach((item) => {
 	console.log(item); // each item
 })
 ```
-## DOM loading
+## DOM manipulation
 
 ### Run after DOM is loaded
 ```Javascript
@@ -61,10 +61,40 @@ document.addEventListener("DOMContentLoaded", function() {
 ```
 
 ### Event Listeners
-```Javascript
-// click listener -> run function
-item.addEventListener("click", function);
 
+#### Attaching event listeners
+
+```Javascript
+var button = document.getElementById("button");
+
+// there are two ways you can do this:
+
+METHOD 1:
+
+button.addEventListener("click", myFunction);
+// - runs a function on execution
+// - easier to organize (and reuse)code when done this way
+
+// you can access certain information about the event
+// by passing an argument
+function myFunction(e) {
+  console.log("test!");
+  console.log(e); // outputs: [object MouseEvent] (but watch this:)
+  console.log(e.target); // outputs: <button id="button">Click me</button>
+  console.log(e.target.getAttribute("id")); // outputs: "button"
+  console.log(e.target.innerText); // outputs: "Click me"
+}
+
+METHOD 2:
+
+button.addEventListener("click", function(e) {
+  // all of the above logic regarding "e" applies here
+})
+```
+
+#### Types of event listeners
+```Javascript
+item.addEventListener("click", function); // triggers when element is clicked
 ```
 
 
