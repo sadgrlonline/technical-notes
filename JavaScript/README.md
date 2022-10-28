@@ -22,8 +22,6 @@ Also see [jQuery](jQuery)
 // get element by ID
 var button = document.getElementById('#button');
 
---
-
 // get elements by class:
 
 // METHOD 1: (querySelectorAll)
@@ -52,6 +50,29 @@ Array.from(items).forEach((item) => {
 })
 ```
 ## DOM manipulation
+
+### DOM methods
+```Javascript
+
+var div = document.createElement('div'); // create a new element*
+// (or select an existing one)
+div.setAttribute("id", "myDiv"); // assign unique id
+div.removeAttribute("id", "myDiv"); // remove id
+div.classList.add("item"); // add class
+div.classList.remove("item"); // remove class
+if (div.classList.contains("item")) { ... } // check if a class exists
+div.innerHTML = `<p>Hello world!</p>`; // add HTML
+div.style.color = "blue"; // set/change single-word CSS property
+div.style.backgroundColor = "yellow"; // set/change dual-word CSS property
+div.style.classList.length; // get number of classes
+div.append(el) // attaches after the selected element
+div.prepend(el) // attaches before the selected element
+
+// * if creating an element with JS,
+// appending the created element to the DOM should come last
+// you won't be able to see anything until you append it
+
+```
 
 ### Run after DOM is loaded
 ```Javascript
