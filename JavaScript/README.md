@@ -75,11 +75,18 @@ div.style.backgroundColor = "yellow"; // set/change dual-word CSS property
 div.style.classList.length; // get number of classes
 div.append(el) // attaches after the selected element
 div.prepend(el) // attaches before the selected element
+document.documentElement.style.setProperty("--bg-color", "#000000"); // change root variable value
 
 // * if creating an element with JS,
 // appending the created element to the DOM should come last
 // you won't be able to see anything until you append it
 
+// more tricks
+
+// get position of cursor during event:
+var rect = e.target.getBoundingClientRect();
+var left = rect.left + window.scrollX;
+var top = rect.top + window.scrollY;
 ```
 
 ### Run after DOM is loaded
