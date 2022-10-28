@@ -15,6 +15,7 @@ Also see [jQuery](jQuery)
 - [localStorage](#localstorage)
 - [Checking if Mobile Device](#checking-if-viewed-on-mobile-device)
 - [Confirmation Dialog](#confirmation-dialog)
+- [URL search params](#url-search-params)
 
 ## Selecting and iterating elements
 
@@ -318,4 +319,24 @@ To make a box appear that allows the user to confirm or deny a change:
 
 ```Javascript
 confirm("Are you sure you want to make this change?")
+```
+## URL search params
+
+With JS, it's possible to grab some variable from the URL and use it on the page somehow.
+
+```Javascript
+// let's say my website is website.com
+// but I want to show someone's name when you enter website.com/?name=Someones+Name
+
+// first, define these variables
+const queryString = window.location.search;
+const urlParams = newURLSearchParams(queryString);
+
+// then create one for your new parameter
+var name = urlParams.get("name");
+
+// check if the parameter exists
+if (name) {
+   // logic here
+}
 ```
