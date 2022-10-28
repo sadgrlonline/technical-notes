@@ -4,6 +4,7 @@ Also see [jQuery](jQuery)
 
 ## Table of Contents
 - [Selecting and iterating elements](#selecting-and-iterating-elements)
+- [DOM loading](#dom-loading)
 - [Random Number](#random-number)
 - [Array Manipulation](#array-manipulation)
 - [String Manipulation](#string-manipulation)
@@ -49,9 +50,8 @@ for (var i = 0; i < items.length; i++) {
 Array.from(items).forEach((item) => {
 	console.log(item); // each item
 })
-
---
 ```
+## DOM loading
 
 ### Run after DOM is loaded
 ```Javascript
