@@ -3,7 +3,7 @@
 Also see [jQuery](jQuery)
 
 ## Table of Contents
-- [DOM Manipulation](#dom-manipulation)
+- [Selecting and iterating elements](#selecting-and-iterating-elements)
 - [Random Number](#random-number)
 - [Array Manipulation](#array-manipulation)
 - [String Manipulation](#string-manipulation)
@@ -15,21 +15,41 @@ Also see [jQuery](jQuery)
 - [Checking if Mobile Device](#checking-if-viewed-on-mobile-device)
 - [Confirmation Dialog](#confirmation-dialog)
 
-## DOM Manipulation
-Note: DOM manipulation is much more easily done with jQuery.
-
-### Selecting elements by class and ID
+## Selecting and iterating elements
 
 ```Javascript
 // get element by ID
 var button = document.getElementById('#button');
 
-// get elements by className:
-// this returns a collection of all of the results, which you can iterate through
-var myClasses = document.getElementsByClassName("className"); 
+--
 
-// just as a sidenote, I hate iterating through classes with vanilla JS - it's so much easier for non-programmers to understand with jQuery first, tbh.
+// get elements by class:
 
+METHOD 1: (querySelectorAll)
+(can also be used for element tags)
+var items = document.querySelectorAll(".item");
+// selects all .item / class="item" elements
+
+// to iterate:
+items.forEach((item) => {
+	console.log(item);
+})
+
+METHOD 2: (getElementsbyClassName)
+
+var items = document.getElementsByClassName("item");
+// selects all .item / class="item" elements
+
+// to iterate:
+for (var i = 0; i < items.length; i++) {
+	console.log(item[i]); // each item
+}
+// OR
+Array.from(items).forEach((item) => {
+	console.log(item); // each item
+})
+
+--
 ```
 
 ### Run after DOM is loaded
