@@ -69,7 +69,7 @@ var button = document.getElementById("button");
 
 // there are two ways you can do this:
 
-METHOD 1:
+// METHOD 1:
 
 button.addEventListener("click", myFunction);
 // - runs a function on execution
@@ -85,7 +85,7 @@ function myFunction(e) {
   console.log(e.target.innerText); // outputs: "Click me"
 }
 
-METHOD 2:
+// METHOD 2:
 
 button.addEventListener("click", function(e) {
   // all of the above logic regarding "e" applies here
