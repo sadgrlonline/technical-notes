@@ -87,6 +87,15 @@ document.documentElement.style.setProperty("--bg-color", "#000000"); // change r
 var rect = e.target.getBoundingClientRect();
 var left = rect.left + window.scrollX;
 var top = rect.top + window.scrollY;
+
+// automatically resize textarea elements' height
+// expand based on content
+var textarea = document.querySelectorAll('textarea');
+textarea.forEach(function(box) {
+    var value = box.value;
+    var numLines = value.split(/\r\n|\r|\n/).length;
+    box.setAttribute("rows", numLines);
+  });
 ```
 
 ### Run after DOM is loaded
