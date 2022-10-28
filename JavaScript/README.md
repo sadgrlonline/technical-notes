@@ -49,6 +49,13 @@ for (var i = 0; i < items.length; i++) {
 Array.from(items).forEach((item) => {
    console.log(item); // each item
 })
+
+--
+
+// tricks:
+
+// select all checked radio buttons:
+document.querySelectorAll('input[type="radio"]:checked');
 ```
 ## DOM manipulation
 
