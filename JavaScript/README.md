@@ -27,6 +27,7 @@ var button = document.getElementById('#button');
 
 METHOD 1: (querySelectorAll)
 (can also be used for element tags)
+
 var items = document.querySelectorAll(".item");
 // selects all .item / class="item" elements
 
