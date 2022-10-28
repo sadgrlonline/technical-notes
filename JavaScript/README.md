@@ -126,7 +126,7 @@ input.addEventListener("focus", myEvent);
 
 // triggered each time a keystroke is pressed while focused on this element
 input.addEventListener("keypress", myEvent); 
-(e.keyCode will give you the code of the key entered. 13 = the enter key.)
+// (e.keyCode will give you the code of the key entered. 13 = the enter key.)
 ```
 
 
