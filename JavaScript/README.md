@@ -13,7 +13,7 @@ Also see [jQuery](jQuery)
 - [Objects](#objects)
 - [Intervals](#intervals)
 - [localStorage](#localstorage)
-- [Checking if Mobile Device](#checking-if-viewed-on-mobile-device)
+- [Mobile devices](#mobile-devices)
 - [Confirmation Dialog](#confirmation-dialog)
 - [URL search params](#url-search-params)
 - [Media manipulation](#media-manipulation)
@@ -325,7 +325,9 @@ var newArr = JSON.parse(localStorage.getItem('itemName'));
 
 ```
 
-## Checking if viewed on mobile device
+## Mobile devices
+
+### Checking if device is mobile
 ```Javascript
 
 // checks if device is mobile
@@ -333,6 +335,21 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 	// run this code on mobile only
   }
 
+```
+
+### Code dependent on media query
+```Javascript
+function myFunction(x) {
+  if (x.matches) { // if media query matches
+    // code here
+  } else {
+    // code here
+  }
+}
+
+var x = window.matchMedia("(max-width: 800px)")
+myFunction(x)
+x.addListener(myFunction) // attach listener
 ```
 
 
