@@ -330,9 +330,8 @@ var newArr = JSON.parse(localStorage.getItem('itemName'));
 
 // checks if device is mobile
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-	// run this code
+	// run this code on mobile only
   }
-    });
 
 ```
 
